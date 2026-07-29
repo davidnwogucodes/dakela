@@ -1,0 +1,126 @@
+/* Primitives shared across sections: container, eyebrows, headings, buttons,
+   image frames and the 1px hairline grid. */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+/* --- Eyebrows ------------------------------------------------------------ */
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin: 0 0 20px;
+}
+
+/* Same eyebrow on an ink background. */
+.eyebrowDark {
+  composes: eyebrow;
+  color: var(--accent-light);
+}
+
+/* --- Headings ------------------------------------------------------------ */
+
+.h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3.2vw, 46px);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+/* --- Buttons ------------------------------------------------------------- */
+
+.buttonRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 16px 26px;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+/* Ochre fill, ink label. Used for every primary WhatsApp action. */
+.btnPrimary {
+  composes: btn;
+  background: var(--accent);
+  color: var(--ink);
+}
+
+.btnPrimary:hover {
+  background: var(--accent-light);
+  color: var(--ink);
+}
+
+/* Outlined, for use on ink backgrounds only. */
+.btnSecondary {
+  composes: btn;
+  color: var(--paper);
+  border: 1px solid var(--ink-border);
+}
+
+.btnSecondary:hover {
+  border-color: var(--text-on-dark);
+  color: var(--white);
+}
+
+/* --- Image frames -------------------------------------------------------- */
+
+/* Fixed-height frame; the image fills it and is cropped, never letterboxed. */
+.frame {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.frameWarm {
+  composes: frame;
+  border-color: var(--line-warm);
+}
+
+.frameImage {
+  object-fit: cover;
+}
+
+/* --- Hairline grid ------------------------------------------------------- */
+
+/* A 1px grid drawn by letting the wrapper background show through the gaps,
+   so dividers stay exactly 1px and never double up between cells. */
+.hairlineGrid {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.hairlineGridDark {
+  composes: hairlineGrid;
+  background: var(--ink-line);
+  border-color: var(--ink-line);
+}
+
+.hairlineCell {
+  background: var(--paper);
+}
+
+.hairlineCellDark {
+  background: var(--ink);
+}

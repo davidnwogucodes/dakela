@@ -1,0 +1,101 @@
+.hero {
+  background: var(--ink);
+  color: var(--paper);
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 72px;
+  align-items: center;
+  min-height: 640px;
+}
+
+.copy {
+  padding: 96px 0;
+  min-width: 0;
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.rule {
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.eyebrowText {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+}
+
+.h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(42px, 4.6vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin: 0 0 28px;
+}
+
+.lead {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-on-dark);
+  max-width: 52ch;
+  margin: 0 0 40px;
+}
+
+.media {
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  height: 640px;
+  overflow: hidden;
+  border-left: 1px solid var(--ink-line);
+}
+
+/* Text above image; the frame loses the left hairline once it is full-bleed. */
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    min-height: 0;
+  }
+
+  .copy {
+    padding: var(--section-y) 0 56px;
+  }
+
+  .media {
+    height: 420px;
+    border-left: 0;
+    border-top: 1px solid var(--ink-line);
+    margin-bottom: 56px;
+  }
+}
+
+@media (max-width: 767px) {
+  .copy {
+    padding: var(--section-y) 0 40px;
+  }
+
+  .media {
+    height: 300px;
+    margin-bottom: 40px;
+  }
+
+  .lead {
+    margin-bottom: 32px;
+  }
+}

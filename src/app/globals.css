@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Dakela Exports — design tokens
+   Every colour used anywhere on the site is declared here. Two background
+   families (ink, paper) plus white for the Products band. No gradients.
+   Border radius is 0 everywhere; shadows exist only on the floating button.
+   ========================================================================== */
+
+:root {
+  /* Ink family — dark sections */
+  --ink: #0f1d18;
+  --ink-deep: #0b1613;
+  --ink-line: #22342c;
+  --ink-border: #3a4b44;
+  /* Hover fill for the two dark buttons (header CTA, floating button). */
+  --ink-hover: #1b3229;
+
+  /* Paper family — light sections */
+  --paper: #f5f2ec;
+  --paper-alt: #efebe1;
+  --white: #ffffff;
+  --line: #ded7c9;
+  --line-warm: #e4ded1;
+
+  /* Accent — ochre */
+  --accent: #b07c2e;
+  --accent-light: #c9a063;
+  --accent-deep: #8c5e1a;
+
+  /* Text */
+  --text: #0f1d18;
+  --text-body: #3d4a44;
+  --text-muted: #5c6660;
+  --text-quiet: #6b7570;
+  --text-quiet-warm: #8c7c60;
+  --text-on-dark: #b8c4bd;
+  --text-muted-dark: #98a6a0;
+  --text-quiet-dark: #7e8c86;
+  --nav-link: #37453f;
+
+  /* Layout */
+  --container: 1240px;
+  --pad-x: 40px;
+  --header-h: 76px;
+  --section-y: 120px;
+
+  /* Type */
+  --serif: var(--font-spectral), Georgia, serif;
+  --sans: var(--font-archivo), system-ui, sans-serif;
+
+  --transition: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* Container padding and section rhythm tighten at each breakdown. */
+@media (max-width: 1239px) {
+  :root {
+    --pad-x: 32px;
+  }
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --section-y: 88px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --pad-x: 20px;
+    --section-y: 64px;
+  }
+}
+
+/* ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Anchor targets clear the 76px sticky header. */
+section[id],
+[id="top"] {
+  scroll-margin-top: var(--header-h);
+}
+
+a {
+  color: var(--accent-deep);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+h1,
+h2,
+h3,
+p {
+  text-wrap: pretty;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* Keep focus visible — ochre reads against both background families. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Visible only to screen readers; used for the section-level h2 on the strip. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

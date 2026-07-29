@@ -1,0 +1,99 @@
+.section {
+  padding: var(--section-y) 0;
+  background: var(--paper);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 88px;
+  align-items: start;
+}
+
+.left {
+  position: sticky;
+  /* Clears the 76px header with 40px of breathing room. */
+  top: 116px;
+  min-width: 0;
+}
+
+.eyebrow {
+  margin-bottom: 24px;
+}
+
+.frame {
+  height: 420px;
+}
+
+.right {
+  min-width: 0;
+}
+
+.heading {
+  margin-bottom: 28px;
+}
+
+.body {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: 62ch;
+  margin: 0 0 20px;
+}
+
+.bodyLast {
+  margin-bottom: 48px;
+}
+
+.valuesGrid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.valueCell {
+  background: var(--paper);
+  padding: 28px 24px;
+}
+
+.valueTitle {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.valueBody {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  /* Sticky only makes sense beside a scrolling column. */
+  .left {
+    position: static;
+  }
+
+  .frame {
+    height: 340px;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    gap: 40px;
+  }
+
+  .frame {
+    height: 260px;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+  }
+}

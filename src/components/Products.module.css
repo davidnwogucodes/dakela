@@ -1,0 +1,104 @@
+.section {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: var(--section-y) 0;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+}
+
+.heading {
+  max-width: 22ch;
+}
+
+.intro {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 34ch;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 32px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cardFrame {
+  height: 220px;
+}
+
+.cardTitle {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  margin: 22px 0 10px;
+  scroll-margin-top: var(--header-h);
+}
+
+.cardBody {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0 0 18px;
+}
+
+/* margin-top: auto bottom-aligns the chip lists across a row so uneven
+   description lengths do not break the horizontal rhythm. */
+.chips {
+  list-style: none;
+  margin: auto 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--line-warm);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--nav-link);
+  background: var(--paper);
+  padding: 6px 10px;
+}
+
+@media (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header {
+    gap: 32px;
+    margin-bottom: 44px;
+  }
+}
+
+@media (max-width: 767px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .intro {
+    max-width: 46ch;
+  }
+
+  .cardFrame {
+    height: 200px;
+  }
+}

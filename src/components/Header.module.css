@@ -1,0 +1,170 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(245, 242, 236, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.row {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-width: 0;
+}
+
+/* Nav links and the CTA share one 30px rhythm, as in the design. */
+.navGroup {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-left: auto;
+  min-width: 0;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.navLink {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--nav-link);
+  white-space: nowrap;
+}
+
+.navLink:hover,
+.navLink[aria-current="true"] {
+  color: var(--ink);
+}
+
+.cta {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 11px 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.cta:hover {
+  background: var(--ink-hover);
+  border-color: var(--ink-hover);
+  color: var(--paper);
+}
+
+/* --- Mobile menu --------------------------------------------------------- */
+
+.menuButton {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-right: calc(-1 * (44px - 24px) / 2);
+  background: none;
+  border: 0;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.menuIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20px;
+  height: 13px;
+}
+
+.menuIcon span {
+  display: block;
+  height: 1.5px;
+  width: 100%;
+  background: currentColor;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.menuIcon[data-open="true"] span:nth-child(1) {
+  transform: translateY(5.75px) rotate(45deg);
+}
+
+.menuIcon[data-open="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuIcon[data-open="true"] span:nth-child(3) {
+  transform: translateY(-5.75px) rotate(-45deg);
+}
+
+.mobileNav {
+  display: none;
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+  padding: 8px 0 16px;
+}
+
+.mobileLink {
+  display: block;
+  padding: 14px 0;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--nav-link);
+  border-bottom: 1px solid var(--line);
+}
+
+.mobileLink:last-child {
+  border-bottom: 0;
+}
+
+.mobileLink:hover {
+  color: var(--ink);
+}
+
+/* Nav collapses to a hamburger below 1024px; the CTA stays in the bar. */
+@media (max-width: 1023px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .menuButton {
+    display: inline-flex;
+  }
+
+  .mobileNav[data-open="true"] {
+    display: block;
+  }
+}
+
+@media (max-width: 1023px) {
+  .navGroup {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .row {
+    gap: 12px;
+  }
+
+  .navGroup {
+    gap: 4px;
+  }
+
+  .cta {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}

@@ -1,0 +1,60 @@
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink);
+  /* Clear space: at least the cap-height of the wordmark on all sides. */
+  padding: 4px 0;
+}
+
+.lockup:hover {
+  color: var(--ink);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.wordmark {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.descriptor {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  margin-top: 4px;
+  /* The descriptor is a single line by design — never let it break. */
+  white-space: nowrap;
+}
+
+/* On the narrowest screens the lockup, the quote CTA and the menu button do not
+   all fit at full size. Scale the lockup rather than dropping the descriptor. */
+@media (max-width: 420px) {
+  .lockup {
+    gap: 8px;
+  }
+
+  .lockup svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .wordmark {
+    font-size: 15px;
+  }
+
+  .descriptor {
+    font-size: 8px;
+    letter-spacing: 0.16em;
+    margin-top: 3px;
+  }
+}

@@ -1,0 +1,92 @@
+.section {
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--section-y) 0;
+}
+
+.intro {
+  max-width: 760px;
+  margin-bottom: 64px;
+}
+
+.heading {
+  margin-bottom: 20px;
+}
+
+.introBody {
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--text-on-dark);
+  max-width: 58ch;
+  margin: 0;
+}
+
+.steps {
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  background: var(--ink);
+  padding: 36px 26px 40px;
+}
+
+/* The generous gap under the numeral is deliberate — it sets the band's rhythm. */
+.numeral {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--accent-light);
+  letter-spacing: 0.1em;
+  margin-bottom: 44px;
+}
+
+.stepTitle {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin: 0 0 12px;
+}
+
+.stepBody {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-muted-dark);
+  margin: 0;
+}
+
+/* 3 + 2 wrap keeps the hairline grid intact without a scroll rail. */
+@media (max-width: 1239px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1023px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .intro {
+    margin-bottom: 48px;
+  }
+
+  .numeral {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    padding: 28px 22px 32px;
+  }
+
+  .numeral {
+    margin-bottom: 24px;
+  }
+}

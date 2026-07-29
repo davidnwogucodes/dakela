@@ -1,0 +1,33 @@
+.footer {
+  background: var(--ink-deep);
+  color: var(--text-quiet-dark);
+  border-top: 1px solid var(--ink-line);
+  /* Keeps the last row clear of the floating WhatsApp button. */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.row {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 767px) {
+  .row {
+    gap: 16px;
+    /* Leave room for the floating button in the bottom-right corner. */
+    padding-bottom: 96px;
+  }
+}
