@@ -1,0 +1,33 @@
+/* Product editor: a stack of panels with a sticky-feeling action row. */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.publishToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-body);
+  cursor: pointer;
+}
+
+.publishToggle input {
+  accent-color: var(--accent-deep);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}

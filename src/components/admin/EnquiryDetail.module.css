@@ -1,0 +1,119 @@
+/* Submission detail: answers on the left, reply and status on the right. */
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: start;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 24px;
+}
+
+/* --- Answers -------------------------------------------------------------- */
+
+.answers {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.answerRow {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-warm);
+}
+
+.answerRow:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.answerRow:first-child {
+  padding-top: 0;
+}
+
+.answerTerm {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+}
+
+/* Marks an answer whose question no longer exists on the form. */
+.orphanTag {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-deep);
+  margin-top: 3px;
+  text-transform: none;
+}
+
+.answerValue {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-body);
+  /* Long pasted specifications should wrap, not stretch the panel. */
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+/* --- Reply ---------------------------------------------------------------- */
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.contactLink {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--accent-deep);
+  overflow-wrap: anywhere;
+}
+
+.contactLink:hover {
+  color: var(--accent);
+}
+
+.deleteButton {
+  align-self: flex-start;
+}
+
+@media (max-width: 1023px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .side {
+    position: static;
+  }
+}
+
+@media (max-width: 599px) {
+  .answerRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}

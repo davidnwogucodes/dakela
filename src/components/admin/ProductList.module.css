@@ -1,0 +1,154 @@
+/* Product list rows: reorder arrows, thumbnail, title, state, actions. */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.list[aria-busy="true"] {
+  opacity: 0.7;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto 72px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 18px;
+  background: var(--white);
+  padding: 14px 18px;
+}
+
+/* --- Reorder -------------------------------------------------------------- */
+
+.reorder {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.arrow {
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--text-muted);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  width: 26px;
+  height: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--paper-alt);
+  color: var(--text);
+  border-color: var(--text-quiet-warm);
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* --- Thumbnail ------------------------------------------------------------ */
+
+.thumb {
+  width: 72px;
+  height: 54px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumbEmpty {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  text-align: center;
+}
+
+/* --- Main ----------------------------------------------------------------- */
+
+.main {
+  min-width: 0;
+}
+
+.title {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.title:hover {
+  color: var(--accent-deep);
+}
+
+.meta {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-quiet);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.state {
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  /* Arrows and thumb stay on the first line with the title; state and actions
+     wrap underneath, so nothing is squeezed to an untappable width. */
+  .row {
+    grid-template-columns: auto 56px minmax(0, 1fr);
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .thumb {
+    width: 56px;
+    height: 44px;
+  }
+
+  .state {
+    grid-column: 3;
+    grid-row: 2;
+  }
+
+  .actions {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    flex-wrap: wrap;
+    padding-top: 4px;
+  }
+}

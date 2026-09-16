@@ -1,0 +1,71 @@
+.wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 60;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 14px 20px;
+  border: 1px solid var(--accent);
+  /* The one shadow on the site. */
+  box-shadow: 0 12px 32px rgba(15, 29, 24, 0.28);
+  transition: var(--transition);
+}
+
+.button:hover {
+  background: var(--ink-hover);
+  color: var(--paper);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.arrow {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Keeps clear of the iOS home indicator and Android gesture bar. */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .wrapper {
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    bottom: 16px;
+    right: 16px;
+  }
+
+  /* The label stays at every width: a wordless square would be a guess for the
+     visitor, so the pill just gets tighter rather than collapsing to an icon. */
+  .button {
+    font-size: 12.5px;
+    padding: 12px 16px;
+    gap: 8px;
+  }
+
+  @supports (padding: env(safe-area-inset-bottom)) {
+    .wrapper {
+      bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}

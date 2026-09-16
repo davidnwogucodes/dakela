@@ -1,0 +1,373 @@
+/* Shared admin UI primitives: controls, buttons, panels, tables.
+   Denser than the public site — this is a working tool, not a brochure — but
+   built from the same tokens so it still reads as the same product. */
+
+/* --- Page headers --------------------------------------------------------- */
+
+.pageHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.pageTitle {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin: 0 0 6px;
+}
+
+.pageIntro {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 68ch;
+}
+
+/* --- Panels --------------------------------------------------------------- */
+
+.panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 24px;
+}
+
+.panelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.panelTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  margin: 0;
+}
+
+/* --- Controls ------------------------------------------------------------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  margin-bottom: 7px;
+}
+
+.hint {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-quiet);
+  margin: 0 0 8px;
+}
+
+.input,
+.select,
+.textarea {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px 12px;
+  width: 100%;
+  min-width: 0;
+  transition: var(--transition);
+  appearance: none;
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--text-quiet-warm);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-body) 50%),
+    linear-gradient(135deg, var(--text-body) 50%, transparent 50%);
+  background-position: calc(100% - 17px) calc(50% + 2px), calc(100% - 12px) calc(50% + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+}
+
+.error {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #9c2b1f;
+  margin: 6px 0 0;
+}
+
+/* --- Buttons -------------------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 11px 20px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttonPrimary {
+  composes: button;
+  background: var(--ink);
+  color: var(--white);
+}
+
+.buttonPrimary:hover:not(:disabled) {
+  background: var(--ink-hover);
+  color: var(--white);
+}
+
+.buttonSecondary {
+  composes: button;
+  background: var(--white);
+  color: var(--text);
+  border-color: var(--line);
+}
+
+.buttonSecondary:hover:not(:disabled) {
+  border-color: var(--text-quiet-warm);
+  color: var(--text);
+}
+
+.buttonDanger {
+  composes: button;
+  background: none;
+  color: #9c2b1f;
+  border-color: #e4c4bf;
+}
+
+.buttonDanger:hover:not(:disabled) {
+  background: #fbf1ef;
+  color: #7d2218;
+}
+
+.buttonSmall {
+  font-size: 12px;
+  padding: 7px 12px;
+}
+
+.buttonRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* --- Tables --------------------------------------------------------------- */
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.table th {
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+  background: var(--paper);
+}
+
+.table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line-warm);
+  color: var(--text-body);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* --- Badges --------------------------------------------------------------- */
+
+.badge {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.badgeOn {
+  composes: badge;
+  border-color: #b8d4c2;
+  background: #eef6f0;
+  color: #2f6a45;
+}
+
+.badgeOff {
+  composes: badge;
+  border-color: var(--line);
+  background: var(--paper);
+  color: var(--text-quiet);
+}
+
+/* --- Notices -------------------------------------------------------------- */
+
+.notice {
+  font-size: 13.5px;
+  line-height: 1.6;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--text-body);
+  margin: 0 0 24px;
+}
+
+.noticeWarn {
+  composes: notice;
+  border-color: #e0cfa8;
+  background: #fbf6ea;
+  color: #6b551f;
+}
+
+.noticeError {
+  composes: notice;
+  border-color: #e4c4bf;
+  background: #fbf1ef;
+  color: #7d2218;
+}
+
+.noticeOk {
+  composes: notice;
+  border-color: #b8d4c2;
+  background: #eef6f0;
+  color: #2f6a45;
+}
+
+/* --- Empty state ---------------------------------------------------------- */
+
+.empty {
+  border: 1px dashed var(--line);
+  background: var(--white);
+  padding: 56px 32px;
+  text-align: center;
+}
+
+.emptyTitle {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.emptyBody {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0 auto 20px;
+  max-width: 46ch;
+}
+
+/* --- Utility -------------------------------------------------------------- */
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .grid2,
+  .grid3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* 16px stops iOS Safari zooming the viewport when a control takes focus. */
+  .input,
+  .select,
+  .textarea {
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,102 @@
+/* Overview: three stat cards over a plain description list of what each
+   section does. The dashboard is used occasionally, so it explains itself. */
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-bottom: 44px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--white);
+  padding: 26px 24px;
+  color: inherit;
+  transition: var(--transition);
+}
+
+.card:hover {
+  background: var(--paper-alt);
+  color: inherit;
+}
+
+.cardLabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+}
+
+.cardValue {
+  font-family: var(--serif);
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.cardNote {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* Unread submissions are the one thing on this screen that wants acting on. */
+.cardNoteAlert {
+  composes: cardNote;
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+
+/* --- Guide ---------------------------------------------------------------- */
+
+.guide {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 26px 24px;
+}
+
+.guideList {
+  margin: 18px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.guideItem {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.guideTerm {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.guideDef {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 68ch;
+}
+
+@media (max-width: 767px) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .guideItem {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}

@@ -9,5 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: site.url + "/enquiry",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }

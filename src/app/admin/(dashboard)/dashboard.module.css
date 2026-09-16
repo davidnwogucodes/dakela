@@ -1,0 +1,279 @@
+/* Dashboard chrome: fixed ink sidebar, scrolling content column.
+   Collapses to a stacked header + horizontal nav below 900px. */
+
+.shell {
+  display: grid;
+  grid-template-columns: 232px minmax(0, 1fr);
+  min-height: 100dvh;
+  background: var(--paper);
+}
+
+/* --- Sidebar -------------------------------------------------------------- */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--ink);
+  border-right: 1px solid var(--ink-line);
+  padding: 28px 0 20px;
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+}
+
+.brand {
+  padding: 0 24px 26px;
+  border-bottom: 1px solid var(--ink-line);
+  margin-bottom: 20px;
+}
+
+.brandLink {
+  display: block;
+  font-family: var(--serif);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+
+.brandLink:hover {
+  color: var(--accent-light);
+}
+
+.brandTag {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-quiet-dark);
+  margin-top: 5px;
+}
+
+/* --- Nav ------------------------------------------------------------------ */
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0 12px;
+  flex: 1;
+}
+
+.navLink {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-on-dark);
+  padding: 11px 12px;
+  transition: var(--transition);
+}
+
+.navLink:hover {
+  background: var(--ink-hover);
+  color: var(--white);
+}
+
+/* Active state carries a left rule as well as a fill, so it does not rely on
+   colour alone. */
+.navLinkActive {
+  composes: navLink;
+  background: var(--ink-hover);
+  color: var(--white);
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+/* --- Sidebar footer ------------------------------------------------------- */
+
+.sidebarFoot {
+  padding: 20px 24px 0;
+  border-top: 1px solid var(--ink-line);
+  margin-top: 20px;
+}
+
+.account {
+  font-size: 11.5px;
+  color: var(--text-quiet-dark);
+  margin: 0 0 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.footActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.footLink {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-on-dark);
+  transition: var(--transition);
+}
+
+.footLink:hover {
+  color: var(--accent-light);
+}
+
+.signOut {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-on-dark);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.signOut:hover:not(:disabled) {
+  color: var(--accent-light);
+}
+
+.signOut:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* --- Content -------------------------------------------------------------- */
+
+.content {
+  min-width: 0;
+}
+
+.contentInner {
+  max-width: 1100px;
+  padding: 44px 40px 80px;
+}
+
+/* --- Access denied -------------------------------------------------------- */
+
+.denied {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  padding: 32px 20px;
+}
+
+.deniedCard {
+  max-width: 460px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 44px 40px;
+}
+
+.deniedTitle {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+}
+
+.deniedBody {
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin: 0 0 28px;
+}
+
+.deniedBody code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  background: var(--paper-alt);
+  padding: 1px 5px;
+}
+
+.deniedActions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* The shared sign-out button is styled for the ink sidebar; on this light card
+   it needs the ink treatment instead. */
+.deniedActions .signOut {
+  color: var(--text);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+.deniedActions .signOut:hover:not(:disabled) {
+  color: var(--accent-deep);
+}
+
+.deniedLink {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+    padding: 20px 0 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--ink-line);
+  }
+
+  .brand {
+    padding: 0 20px 16px;
+    margin-bottom: 14px;
+  }
+
+  /* Horizontal scrolling strip rather than a stacked list, so the content
+     still starts above the fold on a phone. */
+  .nav {
+    flex-direction: row;
+    gap: 4px;
+    padding: 0 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .navLink {
+    white-space: nowrap;
+    padding: 10px 14px;
+  }
+
+  .navLinkActive {
+    box-shadow: inset 0 -2px 0 var(--accent);
+  }
+
+  .sidebarFoot {
+    margin-top: 16px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .account {
+    margin: 0;
+  }
+
+  .contentInner {
+    padding: 32px 20px 64px;
+  }
+}

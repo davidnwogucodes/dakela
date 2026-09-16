@@ -1,0 +1,453 @@
+/* Enquiry form — follows the site primitives: zero radius, 1px hairlines,
+   ochre accent, no shadows. Inputs sit on white against the paper ground so the
+   fillable area reads as distinct from the page without any extra chrome. */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+/* --- Sections ------------------------------------------------------------- */
+
+.fieldset {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 0;
+  padding: 32px 0 0;
+  min-width: 0; /* fieldset defaults to min-content, which breaks the grid */
+}
+
+.legend {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  padding: 0 14px 0 0;
+  margin: 0 0 4px;
+}
+
+/* --- Buyer / supplier toggle ---------------------------------------------- */
+
+.toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 16px;
+}
+
+.toggleOption {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--white);
+  padding: 22px 24px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.toggleOption:hover {
+  background: var(--paper-alt);
+}
+
+/* The radio itself is visually hidden, so the selected state has to be carried
+   entirely by the panel — colour alone would not be enough, hence the weight
+   change and the inset rule on the left edge. */
+.toggleOptionActive,
+.toggleOptionActive:hover {
+  background: var(--ink);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.toggleLabel {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.toggleNote {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.toggleOptionActive .toggleLabel {
+  color: var(--white);
+}
+
+.toggleOptionActive .toggleNote {
+  color: var(--text-on-dark);
+}
+
+/* Keyboard focus has to be visible even though the input is hidden. */
+.toggleOption:focus-within {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 2px;
+}
+
+/* --- Fields --------------------------------------------------------------- */
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Long text and checkbox groups need the whole row; everything else pairs up. */
+.spanFull {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  margin-bottom: 8px;
+}
+
+.required {
+  color: var(--accent-deep);
+}
+
+.hint {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-quiet);
+  margin: 0 0 10px;
+}
+
+.input,
+.select,
+.textarea {
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 13px 14px;
+  width: 100%;
+  min-width: 0;
+  transition: var(--transition);
+  appearance: none;
+}
+
+.textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--text-quiet-warm);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--text-quiet);
+}
+
+/* Native arrow is removed by appearance:none, so draw one. */
+.select {
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-body) 50%),
+    linear-gradient(135deg, var(--text-body) 50%, transparent 50%);
+  background-position: calc(100% - 19px) calc(50% + 2px), calc(100% - 14px) calc(50% + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 38px;
+}
+
+.error {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #9c2b1f;
+  margin: 7px 0 0;
+}
+
+.input[aria-invalid="true"],
+.select[aria-invalid="true"],
+.textarea[aria-invalid="true"] {
+  border-color: #9c2b1f;
+}
+
+/* --- Checkboxes ----------------------------------------------------------- */
+
+.checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--text-body);
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 11px 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.check:hover {
+  border-color: var(--text-quiet-warm);
+}
+
+.check:focus-within {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 2px;
+}
+
+.check input {
+  accent-color: var(--accent-deep);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+
+/* --- Commodity rows ------------------------------------------------------- */
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 18px;
+}
+
+/* commodity | grade | volume | unit | remove */
+.itemRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.2fr) minmax(0, 0.7fr) minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  background: var(--paper);
+  padding: 20px;
+}
+
+/* Inside a row the labels are repeated per row, so they shrink back. */
+.itemRow .label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-quiet);
+  margin-bottom: 6px;
+}
+
+.itemRow .input,
+.itemRow .select {
+  font-size: 14px;
+  padding: 10px 12px;
+}
+
+.itemRow .select {
+  padding-right: 34px;
+  background-position: calc(100% - 17px) calc(50% + 2px), calc(100% - 12px) calc(50% + 2px);
+}
+
+.removeButton {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-quiet);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  /* Sit on the control baseline, past the row's small label. */
+  margin-top: 27px;
+  transition: var(--transition);
+}
+
+.removeButton:hover {
+  color: #9c2b1f;
+}
+
+.addButton {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent-deep);
+  background: none;
+  border: 0;
+  padding: 16px 0 0;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: var(--transition);
+}
+
+.addButton:hover {
+  color: var(--accent);
+}
+
+/* --- Submit --------------------------------------------------------------- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+}
+
+.actions button[disabled] {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+.actionsNote {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-quiet);
+  margin: 0;
+  max-width: 42ch;
+}
+
+.submitError {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #9c2b1f;
+  background: #fbf1ef;
+  border: 1px solid #e4c4bf;
+  padding: 14px 16px;
+  margin: 0;
+}
+
+/* --- Success -------------------------------------------------------------- */
+
+.success {
+  border: 1px solid var(--line);
+  background: var(--white);
+  padding: 56px 48px;
+  max-width: 62ch;
+}
+
+.successHeading {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+  margin: 0 0 16px;
+}
+
+.successBody {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin: 0 0 32px;
+  max-width: 54ch;
+}
+
+.linkButton {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent-deep);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.linkButton:hover {
+  color: var(--accent);
+}
+
+/* --- Utility -------------------------------------------------------------- */
+
+/* Off-screen but still focusable and still submitted — used for the visually
+   hidden radios and for the honeypot. */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  /* Four controls plus a remove button will not fit; stack to two columns and
+     let the remove button sit on its own line. */
+  .itemRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .removeButton {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 767px) {
+  .form {
+    gap: 40px;
+  }
+
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .toggle {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .itemRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .success {
+    padding: 40px 24px;
+  }
+
+  /* 16px keeps iOS Safari from zooming the viewport on focus. */
+  .input,
+  .select,
+  .textarea {
+    font-size: 16px;
+  }
+
+  .itemRow .input,
+  .itemRow .select {
+    font-size: 16px;
+  }
+}

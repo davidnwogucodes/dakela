@@ -5,8 +5,8 @@
  * See CLIENT-TODO.md — the site must not launch while any of them are unresolved.
  */
 
-/** WhatsApp number in E.164 without the leading "+", used to build wa.me links. */
-const WHATSAPP_E164 = "2349162694790";
+/** Phone number in E.164 without the leading "+", used to build the tel: link. */
+const PHONE_E164 = "2349162694790";
 
 export const site = {
   name: "Dakela Exports Nig. Ltd.",
@@ -19,8 +19,7 @@ export const site = {
   url: "https://dakelaexports.com",
 
   phoneDisplay: "+234 916 269 4790",
-  phoneHref: `tel:+${WHATSAPP_E164}`,
-  whatsappHref: `https://wa.me/${WHATSAPP_E164}`,
+  phoneHref: `tel:+${PHONE_E164}`,
 
   /** TODO(client): email domain is assumed, not confirmed. */
   email: "info@dakelaexports.com",
@@ -51,14 +50,24 @@ export const features = {
   showCommodityLists: true,
   /** Show the whole "For local suppliers" section. */
   showSuppliers: true,
-  /** Show the floating WhatsApp button. */
+  /** Show the floating "Make an enquiry" button. */
   showStickyBar: true,
 } as const;
 
+/**
+ * Header navigation. These are in-page anchors in the order the sections appear,
+ * so the nav doubles as a map of the page. The enquiry call to action is not in
+ * here — it is a button beside the nav, because it leads to a different page and
+ * should not read as one more section to scroll to.
+ */
 export const nav = [
   { label: "About", href: "#about" },
   { label: "Products", href: "#products" },
   { label: "Process", href: "#process" },
   { label: "Markets", href: "#reach" },
   { label: "Suppliers", href: "#suppliers" },
+  { label: "Contact", href: "#contact" },
 ] as const;
+
+/** The enquiry form. Every call to action on the site points here. */
+export const ENQUIRY_PATH = "/enquiry";

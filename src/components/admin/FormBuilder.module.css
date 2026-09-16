@@ -1,0 +1,212 @@
+/* Form builder: three sections, each a list of questions that expand in place. */
+
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.sectionTitle {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0 0 3px;
+}
+
+.sectionNote {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.sectionEmpty {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-quiet);
+  background: var(--white);
+  border: 1px dashed var(--line);
+  padding: 22px 20px;
+  margin: 0;
+}
+
+/* --- List ----------------------------------------------------------------- */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.item {
+  background: var(--white);
+}
+
+.itemRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+}
+
+.reorder {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.arrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--text-muted);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--paper-alt);
+  color: var(--text);
+  border-color: var(--text-quiet-warm);
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.itemMain {
+  min-width: 0;
+}
+
+.itemLabel {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 2px;
+}
+
+.requiredMark {
+  color: var(--accent-deep);
+}
+
+.itemMeta {
+  font-size: 12px;
+  color: var(--text-quiet);
+  margin: 0;
+}
+
+.itemState {
+  display: flex;
+  align-items: center;
+}
+
+.itemActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- Inline editor -------------------------------------------------------- */
+
+/* Sits inside the list row, tinted so it reads as a drawer rather than a
+   sibling row. */
+.editorSlot {
+  border-top: 1px solid var(--line);
+  background: var(--paper);
+  padding: 22px 18px;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.editor code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  background: var(--paper-alt);
+  padding: 1px 5px;
+}
+
+.switches {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.switch {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-body);
+  cursor: pointer;
+}
+
+.switch input {
+  accent-color: var(--accent-deep);
+  width: 15px;
+  height: 15px;
+  margin: 2px 0 0;
+  flex-shrink: 0;
+}
+
+.switch strong {
+  display: block;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.switch em {
+  display: block;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-quiet);
+  margin-top: 1px;
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .itemRow {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .itemState {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .itemActions {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    flex-wrap: wrap;
+    padding-top: 4px;
+  }
+
+  .editorSlot {
+    padding: 18px 14px;
+  }
+}

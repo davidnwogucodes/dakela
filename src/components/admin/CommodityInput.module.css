@@ -1,0 +1,95 @@
+/* Tag editor for the commodity list. */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-body);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 6px 8px 6px 11px;
+}
+
+.remove {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--text-quiet);
+  background: none;
+  border: 0;
+  padding: 0 2px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.remove:hover {
+  color: #9c2b1f;
+}
+
+.entry {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px 12px;
+  flex: 1;
+  min-width: 0;
+  transition: var(--transition);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.add {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 0 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.add:hover:not(:disabled) {
+  border-color: var(--text-quiet-warm);
+}
+
+.add:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 767px) {
+  .input {
+    font-size: 16px;
+  }
+}

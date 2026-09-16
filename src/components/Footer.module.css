@@ -2,7 +2,7 @@
   background: var(--ink-deep);
   color: var(--text-quiet-dark);
   border-top: 1px solid var(--ink-line);
-  /* Keeps the last row clear of the floating WhatsApp button. */
+  /* Keeps the last row clear of the floating enquiry button. */
   padding-bottom: env(safe-area-inset-bottom);
 }
 
@@ -30,4 +30,18 @@
     /* Leave room for the floating button in the bottom-right corner. */
     padding-bottom: 96px;
   }
+}
+
+/* The footer is the last chance to reach the form for anyone who scrolled past
+   every other call to action. */
+.link {
+  color: var(--text-on-dark);
+  font-weight: 600;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: var(--transition);
+}
+
+.link:hover {
+  color: var(--accent-light);
 }

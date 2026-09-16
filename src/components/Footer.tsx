@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { LogoMark } from "./Logo";
-import { site } from "@/config/site";
+import { ENQUIRY_PATH, site } from "@/config/site";
 import shared from "@/styles/shared.module.css";
 import styles from "./Footer.module.css";
 
@@ -14,6 +15,9 @@ export function Footer() {
           <span>{site.legalName}</span>
         </div>
         <div>{site.tagline}</div>
+        <Link href={ENQUIRY_PATH} className={styles.link}>
+          Make an enquiry
+        </Link>
         <div>© {year} {site.name}</div>
       </div>
     </footer>

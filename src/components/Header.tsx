@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
-import { features, nav, site } from "@/config/site";
+import Link from "next/link";
+import { ENQUIRY_PATH, features, nav } from "@/config/site";
 import shared from "@/styles/shared.module.css";
 import styles from "./Header.module.css";
 
@@ -78,15 +79,11 @@ export function Header() {
             ))}
           </nav>
 
-          {/* The quote CTA stays visible outside the collapsed menu. */}
-          <a
-            href={site.whatsappHref}
-            target="_blank"
-            rel="noopener"
-            className={styles.cta}
-          >
-            Request a quote
-          </a>
+          {/* The enquiry CTA stays outside the collapsed menu, so the one action
+              worth taking is reachable at every width without opening anything. */}
+          <Link href={ENQUIRY_PATH} className={styles.cta}>
+            Make an enquiry
+          </Link>
 
           <button
             type="button"
@@ -123,6 +120,14 @@ export function Header() {
               {link.label}
             </a>
           ))}
+
+          <Link
+            href={ENQUIRY_PATH}
+            className={styles.mobileCta}
+            onClick={() => setMenuOpen(false)}
+          >
+            Make an enquiry →
+          </Link>
         </div>
       </nav>
     </header>

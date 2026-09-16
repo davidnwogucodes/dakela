@@ -56,7 +56,7 @@
   transition: var(--transition);
 }
 
-/* Ochre fill, ink label. Used for every primary WhatsApp action. */
+/* Ochre fill, ink label. Used for every primary call to action. */
 .btnPrimary {
   composes: btn;
   background: var(--accent);

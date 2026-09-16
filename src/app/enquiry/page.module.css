@@ -1,0 +1,69 @@
+/* Enquiry page shell. Paper ground, a plain masthead in place of the scroll-spy
+   header, and a single measured column for the form. */
+
+.masthead {
+  height: var(--header-h);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.mastheadInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+}
+
+.back {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-body);
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.back:hover {
+  color: var(--accent-deep);
+}
+
+.section {
+  background: var(--paper);
+  padding: var(--section-y) 0;
+}
+
+.intro {
+  max-width: 62ch;
+  margin-bottom: 56px;
+}
+
+.heading {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(32px, 3.4vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 20px;
+  max-width: 20ch;
+}
+
+.lede {
+  font-size: 17px;
+  line-height: 1.68;
+  color: var(--text-body);
+  margin: 0;
+  max-width: 58ch;
+}
+
+/* The form is capped narrower than the container: long single-column forms are
+   harder to scan when the fields run the full 1240px. */
+.formWrap {
+  max-width: 880px;
+}
+
+@media (max-width: 767px) {
+  .intro {
+    margin-bottom: 40px;
+  }
+}

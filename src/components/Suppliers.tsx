@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { supplierBlocks } from "@/data/content";
-import { site } from "@/config/site";
+import { ENQUIRY_PATH } from "@/config/site";
 import shared from "@/styles/shared.module.css";
 import styles from "./Suppliers.module.css";
 
@@ -29,14 +30,11 @@ export function Suppliers() {
             ))}
           </div>
 
-          <a
-            href={site.whatsappHref}
-            target="_blank"
-            rel="noopener"
-            className={styles.link}
-          >
-            Send your supply details on WhatsApp →
-          </a>
+          <div className={styles.actions}>
+            <Link href={ENQUIRY_PATH} className={styles.link}>
+              Apply to supply →
+            </Link>
+          </div>
         </div>
       </div>
     </section>

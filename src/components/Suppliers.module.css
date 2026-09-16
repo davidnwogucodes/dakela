@@ -75,6 +75,25 @@
   color: var(--accent-deep);
 }
 
+/* Wraps on narrow screens so the underline never splits across two lines. */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.linkQuiet {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.linkQuiet:hover {
+  color: var(--accent-deep);
+}
+
 @media (max-width: 1023px) {
   .section {
     padding: var(--section-y) 0;

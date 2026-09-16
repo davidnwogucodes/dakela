@@ -133,6 +133,26 @@
   color: var(--ink);
 }
 
+/* The enquiry action closes the mobile menu, styled as a button rather than one
+   more link so it does not read as a sixth section of the page. */
+.mobileCta {
+  display: block;
+  margin-top: 16px;
+  padding: 15px 20px;
+  background: var(--ink);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.mobileCta:hover {
+  background: var(--ink-hover);
+  color: var(--white);
+}
+
 /* Nav collapses to a hamburger below 1024px; the CTA stays in the bar. */
 @media (max-width: 1023px) {
   .desktopNav {

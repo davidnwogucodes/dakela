@@ -102,3 +102,124 @@
     height: 200px;
   }
 }
+
+/* --- Hover / tap detail panel --------------------------------------------- */
+
+/* The frame is the positioning context for both the panel and its toggle. */
+.cardFrame {
+  position: relative;
+}
+
+.cardFrameEmpty {
+  width: 100%;
+  height: 100%;
+  background: var(--paper-alt);
+}
+
+/* The panel covers the photograph. Translated out of view rather than hidden,
+   so it can slide rather than pop, and so its height is known up front. */
+.detail {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 22, 19, 0.94);
+  color: var(--text-on-dark);
+  padding: 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  transform: translateY(100%);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Not interactive until revealed, so it never swallows a click on the photo. */
+  pointer-events: none;
+}
+
+.detailList {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.detailRow {
+  display: block;
+}
+
+.detailTerm {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin: 0 0 3px;
+}
+
+.detailValue {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-on-dark);
+  margin: 0;
+}
+
+/* --- Toggle --------------------------------------------------------------- */
+
+.detailToggle {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 0;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.detailToggle:hover {
+  background: var(--accent-light);
+}
+
+.detailToggle:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+.toggleIcon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* --- Open states ---------------------------------------------------------- */
+
+/* Opened by the button. .cardOpen is a modifier applied alongside .card, so it
+   only needs to carry the difference. */
+.cardOpen .detail {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Opened by hover — only where hovering is a real thing. A touch device
+   reports `hover: none`, so this block never applies there and the button is
+   the only way in, which is what we want. */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .detail,
+  .card:focus-within .detail {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* Honour a reduced-motion preference: still reveal, just without the slide. */
+@media (prefers-reduced-motion: reduce) {
+  .detail {
+    transition: none;
+  }
+}

@@ -6,6 +6,15 @@ Built from the design handoff in [design_handoff_dakela_exports/](design_handoff
 **Before launch, work through [CLIENT-TODO.md](CLIENT-TODO.md)** — the RC number, email,
 office address, domain and full-resolution photography are still placeholders.
 
+## Dashboard
+
+The site is owner-managed: products, the enquiry form, submissions and the
+colour palette are all edited at `/admin` rather than in code. See
+[SETUP.md](SETUP.md) for the one-time setup and how access control works.
+
+Content lives in Supabase (Postgres + Storage + Auth, all free tier). The public
+pages stay static and are revalidated when the owner saves.
+
 ## Stack
 
 Next.js 15 (App Router) · React 19 · TypeScript · CSS Modules.
@@ -94,11 +103,15 @@ individual grids collapse in their own modules.
 
 ## Hosting
 
-The whole site prerenders to static HTML. Any host works.
+Every page prerenders to static HTML, but the enquiry form posts to a server
+route (`/api/enquiry`), so the host must be able to run Node — a pure static
+export no longer covers the whole site.
 
 - **Vercel / Netlify / Cloudflare Pages** — deploy as-is; `next/image` optimisation and
   AVIF/WebP `srcset` generation work out of the box.
-- **Plain static host** (S3, GitHub Pages, nginx) — set `output: "export"` and
+- **Plain static host** (S3, GitHub Pages, nginx) — only viable if the enquiry
+  form is dropped or repointed at a third-party endpoint, since `output: "export"`
+  cannot build an API route. Otherwise set `output: "export"` and
   `images.unoptimized: true` in [next.config.ts](next.config.ts), then serve `out/`. You
   lose automatic responsive variants, so pre-generate them from the full-resolution
   originals instead.

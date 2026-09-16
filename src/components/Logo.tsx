@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/config/site";
 import styles from "./Logo.module.css";
 
@@ -43,15 +44,42 @@ export function LogoMark({
   );
 }
 
-/** Mark plus wordmark and descriptor, side by side. */
-export function Logo() {
-  return (
-    <a href="#top" className={styles.lockup} aria-label={`${site.legalName} — back to top`}>
+/**
+ * Mark plus wordmark and descriptor, side by side.
+ *
+ * The lockup renders its own anchor, so it must never be wrapped in a <Link> —
+ * that nests one anchor inside another, which React refuses. Point it somewhere
+ * else with `href` instead: "#top" on the home page, "/" from a subpage.
+ */
+export function Logo({ href = "#top" }: { href?: string }) {
+  const label =
+    href === "#top"
+      ? site.legalName + " — back to top"
+      : site.legalName + " — home";
+
+  const inner = (
+    <>
       <LogoMark size={26} />
       <span className={styles.text}>
         <span className={styles.wordmark}>{site.shortName}</span>
         <span className={styles.descriptor}>{site.descriptor}</span>
       </span>
-    </a>
+    </>
+  );
+
+  // A bare hash is a same-page jump and wants a plain anchor; a route wants
+  // next/link, so navigation stays client-side.
+  if (href.startsWith("#")) {
+    return (
+      <a href={href} className={styles.lockup} aria-label={label}>
+        {inner}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={styles.lockup} aria-label={label}>
+      {inner}
+    </Link>
   );
 }

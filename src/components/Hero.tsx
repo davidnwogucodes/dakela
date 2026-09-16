@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { WhatsAppIcon } from "./WhatsAppIcon";
-import { site, site_email_href } from "@/config/site";
+import Link from "next/link";
+import { ENQUIRY_PATH, site_email_href } from "@/config/site";
 import shared from "@/styles/shared.module.css";
 import styles from "./Hero.module.css";
 
@@ -27,15 +27,9 @@ export function Hero() {
           </p>
 
           <div className={shared.buttonRow}>
-            <a
-              href={site.whatsappHref}
-              target="_blank"
-              rel="noopener"
-              className={shared.btnPrimary}
-            >
-              <WhatsAppIcon />
-              WhatsApp: {site.phoneDisplay}
-            </a>
+            <Link href={ENQUIRY_PATH} className={shared.btnPrimary}>
+              Request an offer
+            </Link>
             <a href={site_email_href} className={shared.btnSecondary}>
               Email the trade desk
             </a>

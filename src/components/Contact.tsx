@@ -1,5 +1,5 @@
-import { WhatsAppIcon } from "./WhatsAppIcon";
-import { site, site_email_href } from "@/config/site";
+import Link from "next/link";
+import { ENQUIRY_PATH, site, site_email_href } from "@/config/site";
 import shared from "@/styles/shared.module.css";
 import styles from "./Contact.module.css";
 
@@ -23,25 +23,21 @@ export function Contact() {
           </p>
 
           <div className={shared.buttonRow}>
-            <a
-              href={site.whatsappHref}
-              target="_blank"
-              rel="noopener"
-              className={shared.btnPrimary}
-            >
-              <WhatsAppIcon />
-              Chat on WhatsApp
-            </a>
+            <Link href={ENQUIRY_PATH} className={shared.btnPrimary}>
+              Send your specification
+            </Link>
             <a href={site_email_href} className={shared.btnSecondary}>
               {site.email}
             </a>
           </div>
         </div>
 
-        {/* No contact form by design — the client asked for direct contact only. */}
+        {/* Still no form in this section — the client asked for direct contact
+            here. The structured enquiry form lives on its own page, linked
+            above, so this panel stays contact details only. */}
         <div className={styles.panel}>
           <div className={styles.panelRow}>
-            <div className={styles.panelLabel}>Telephone / WhatsApp</div>
+            <div className={styles.panelLabel}>Telephone</div>
             <a href={site.phoneHref} className={styles.phone}>
               {site.phoneDisplay}
             </a>
