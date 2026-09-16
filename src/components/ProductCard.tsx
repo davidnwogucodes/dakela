@@ -2,6 +2,7 @@
 
 import { useId, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import shared from "@/styles/shared.module.css";
 import styles from "./Products.module.css";
 
@@ -89,9 +90,17 @@ export function ProductCard({
 
       {/* Anchor heading — one per commodity group, for search landings. */}
       <h3 id={product.slug} className={styles.cardTitle}>
-        {product.title}
+        <Link href={"/products/" + product.slug} className={styles.cardTitleLink}>
+          {product.title}
+        </Link>
       </h3>
       <p className={styles.cardBody}>{product.description}</p>
+
+      {/* The hover panel is a teaser; the full specification lives on its own
+          page, which is also what search engines index. */}
+      <Link href={"/products/" + product.slug} className={styles.cardMore}>
+        Full specification →
+      </Link>
 
       {showCommodities && product.commodities.length > 0 && (
         <ul className={styles.chips}>

@@ -1,0 +1,63 @@
+/* Plain header for subpages. Matches the home header's height so switching
+   between them does not shift the page. */
+
+.masthead {
+  height: var(--header-h);
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.back {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-body);
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.back:hover {
+  color: var(--accent-deep);
+}
+
+.cta {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  background: var(--ink);
+  padding: 11px 18px;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.cta:hover {
+  background: var(--ink-hover);
+  color: var(--white);
+}
+
+@media (max-width: 599px) {
+  /* The back link is the redundant one here: the logo already goes home. */
+  .back {
+    display: none;
+  }
+
+  .cta {
+    padding: 10px 14px;
+    font-size: 12.5px;
+  }
+}

@@ -6,7 +6,14 @@
  * cannot drift apart.
  */
 
-import { FIELD_TYPES, type FieldType, type FormSection } from "./model";
+import {
+  FIELD_TYPES,
+  type FaqItem,
+  type FieldType,
+  type FormSection,
+  type ProductDocument,
+  type SpecRow,
+} from "./model";
 
 export type Errors = Record<string, string>;
 
@@ -24,11 +31,35 @@ export type ProductInput = {
   image_path: string | null;
   image_position: string;
   alt: string;
+
+  // Hover-card teasers
   origin: string;
   uses: string;
   nutrition: string;
   grades: string;
   seasonality: string;
+
+  // Product page
+  overview: string;
+  botanical_name: string;
+  producing_states: string[];
+  applications: string[];
+  forms: string[];
+  specifications: SpecRow[];
+  moq: string;
+  lead_time: string;
+  related_slugs: string[];
+  faq: FaqItem[];
+  documents: ProductDocument[];
+
+  // Empty means inherit the site-wide list
+  packaging: string[];
+  loading_ports: string[];
+  incoterms: string[];
+  shipment_options: string[];
+  quality_assurance: string[];
+  certifications: string[];
+
   published: boolean;
 };
 
@@ -72,6 +103,35 @@ export function validateProduct(input: ProductInput): Errors {
   }
 
   if (trimmed(input.alt).length > 300) errors.alt = "Keep the alt text under 300 characters.";
+
+  if (trimmed(input.overview).length > 4000) {
+    errors.overview = "Keep the overview under 4000 characters.";
+  }
+
+  // A specification row needs both halves to mean anything. Flagging it here is
+  // kinder than silently dropping it on save, which looks like data loss.
+  const rows = Array.isArray(input.specifications) ? input.specifications : [];
+  if (rows.length > 60) {
+    errors.specifications = "No more than 60 specification rows.";
+  } else {
+    const halfFilled = rows.findIndex(
+      (row) => Boolean(trimmed(row?.label)) !== Boolean(trimmed(row?.value)),
+    );
+    if (halfFilled !== -1) {
+      errors.specifications = "Every specification row needs both a label and a value.";
+    }
+  }
+
+  const questions = Array.isArray(input.faq) ? input.faq : [];
+  if (questions.length > 30) {
+    errors.faq = "No more than 30 questions.";
+  } else if (
+    questions.some(
+      (row) => Boolean(trimmed(row?.question)) !== Boolean(trimmed(row?.answer)),
+    )
+  ) {
+    errors.faq = "Every question needs an answer.";
+  }
 
   return errors;
 }

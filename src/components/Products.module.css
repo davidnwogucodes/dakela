@@ -57,6 +57,29 @@
   margin: 0 0 18px;
 }
 
+.cardTitleLink {
+  color: inherit;
+  transition: var(--transition);
+}
+
+.cardTitleLink:hover {
+  color: var(--accent-deep);
+}
+
+.cardMore {
+  align-self: flex-start;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--accent-deep);
+  margin-bottom: 18px;
+  transition: var(--transition);
+}
+
+.cardMore:hover {
+  color: var(--accent);
+}
+
 /* margin-top: auto bottom-aligns the chip lists across a row so uneven
    description lengths do not break the horizontal rhythm. */
 .chips {

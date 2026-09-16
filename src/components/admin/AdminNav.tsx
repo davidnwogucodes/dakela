@@ -7,6 +7,7 @@ import styles from "@/app/admin/(dashboard)/dashboard.module.css";
 const items = [
   { href: "/admin", label: "Overview" },
   { href: "/admin/products", label: "Products" },
+  { href: "/admin/export-info", label: "Export info" },
   { href: "/admin/form", label: "Enquiry form" },
   { href: "/admin/enquiries", label: "Submissions" },
   { href: "/admin/appearance", label: "Appearance" },

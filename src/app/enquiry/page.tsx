@@ -1,8 +1,9 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EnquiryForm } from "@/components/EnquiryForm";
 import { Footer } from "@/components/Footer";
-import { Logo } from "@/components/Logo";
+import { Masthead } from "@/components/Masthead";
 import { ThemeStyle } from "@/components/ThemeStyle";
 import { site, site_email_href } from "@/config/site";
 import { getFormFields, getPublishedProducts, getSettings } from "@/lib/content";
@@ -44,16 +45,7 @@ export default async function EnquiryPage() {
   return (
     <>
       <ThemeStyle />
-      {/* The site header is a scroll-spy over same-page anchors, which have no
-          targets here — this page gets a plain masthead back to the home page. */}
-      <header className={styles.masthead}>
-        <div className={shared.container + " " + styles.mastheadInner}>
-          <Logo href="/" />
-          <Link href="/" className={styles.back}>
-            ← Back to site
-          </Link>
-        </div>
-      </header>
+      <Masthead showEnquiry={false} />
 
       <main>
         <section className={styles.section}>
@@ -74,12 +66,14 @@ export default async function EnquiryPage() {
             </div>
 
             <div className={styles.formWrap}>
-              <EnquiryForm
-                fields={fields}
-                commodities={commodities}
-                buyerEnabled={settings.buyer_enabled}
-                supplierEnabled={settings.supplier_enabled}
-              />
+              <Suspense fallback={null}>
+                <EnquiryForm
+                  fields={fields}
+                  commodities={commodities}
+                  buyerEnabled={settings.buyer_enabled}
+                  supplierEnabled={settings.supplier_enabled}
+                />
+              </Suspense>
             </div>
           </div>
         </section>

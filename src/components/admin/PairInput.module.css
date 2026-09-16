@@ -1,0 +1,133 @@
+/* Two-part row editor, used for the specification table and the FAQ. */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 14px;
+  background: var(--paper);
+  padding: 14px 16px;
+}
+
+.reorder {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 18px;
+}
+
+.arrow {
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1;
+  color: var(--text-muted);
+  background: var(--white);
+  border: 1px solid var(--line);
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.arrow:hover:not(:disabled) {
+  background: var(--paper-alt);
+  color: var(--text);
+  border-color: var(--text-quiet-warm);
+}
+
+.arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Short values sit side by side; prose answers get the full width and stack. */
+.fields {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 12px;
+  min-width: 0;
+}
+
+.fieldsStacked {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.miniLabel {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  margin-bottom: 6px;
+}
+
+.remove {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-quiet);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 20px;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.remove:hover {
+  color: #9c2b1f;
+}
+
+.add {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-deep);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: var(--transition);
+}
+
+.add:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 767px) {
+  .row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .remove {
+    grid-column: 1 / -1;
+    margin-top: 0;
+    justify-self: start;
+  }
+}

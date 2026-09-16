@@ -31,3 +31,89 @@
   border-top: 1px solid var(--line);
   padding-top: 20px;
 }
+
+/* --- Related picker ------------------------------------------------------- */
+
+.related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.relatedItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13.5px;
+  color: var(--text-body);
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.relatedItem:hover {
+  border-color: var(--text-quiet-warm);
+}
+
+.relatedItem:focus-within {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 2px;
+}
+
+.relatedItem input {
+  accent-color: var(--accent-deep);
+  width: 15px;
+  height: 15px;
+  margin: 0;
+}
+
+/* --- Overrides (collapsed by default) ------------------------------------- */
+
+/* Folded away because most products will never need it: the whole point of the
+   shared blocks is that they are edited once, elsewhere. */
+.advanced {
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.advancedSummary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-body);
+  padding: 16px 20px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  transition: var(--transition);
+}
+
+.advancedSummary::-webkit-details-marker {
+  display: none;
+}
+
+.advancedSummary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--accent-deep);
+}
+
+.advanced[open] .advancedSummary::after {
+  content: "−";
+}
+
+.advancedSummary:hover {
+  color: var(--accent-deep);
+}
+
+.advancedBody {
+  border-top: 1px solid var(--line);
+  padding: 22px 20px;
+}

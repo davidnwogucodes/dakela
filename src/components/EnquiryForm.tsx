@@ -1,6 +1,7 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import type { FormField } from "@/lib/model";
 import { MAX_ITEMS, UNITS } from "@/lib/model";
 import {
@@ -68,6 +69,7 @@ export function EnquiryForm({
   supplierEnabled: boolean;
 }) {
   const uid = useId();
+  const searchParams = useSearchParams();
 
   // Whichever side is open — if only one is, the branch chooser is not shown.
   const initialType: "buyer" | "supplier" = buyerEnabled ? "buyer" : "supplier";
@@ -81,6 +83,32 @@ export function EnquiryForm({
   const [status, setStatus] = useState<Status>("idle");
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [website, setWebsite] = useState("");
+
+  /**
+   * Prefill the first commodity row when arriving from a product page
+   * (/enquiry?commodity=Hibiscus+Flowers).
+   *
+   * Done in an effect rather than in the useState initialiser: the page is
+   * statically rendered, so the server has no query string and seeding state
+   * from it directly would hydrate to different markup than it rendered.
+   */
+  useEffect(() => {
+    const wanted = searchParams.get("commodity");
+    if (!wanted) return;
+
+    // Only accept a value that is actually on the list, so the query string
+    // cannot inject arbitrary text into the form.
+    const match = commodities.find(
+      (c) => c.toLowerCase() === wanted.trim().toLowerCase(),
+    );
+    if (!match) return;
+
+    setItems((prev) => {
+      // Never overwrite something the visitor has already chosen.
+      if (prev.length !== 1 || prev[0].commodity) return prev;
+      return [{ ...prev[0], commodity: match }];
+    });
+  }, [searchParams, commodities]);
 
   const visible = fieldsFor(fields, type);
   const isBuyer = type === "buyer";

@@ -1,0 +1,493 @@
+/* Product detail page. Alternating ink and paper bands, hairline grids, no
+   radius and no shadows — the same vocabulary as the home page, at length. */
+
+/* --- Hero ----------------------------------------------------------------- */
+
+.hero {
+  background: var(--paper);
+  padding: var(--section-y) 0 calc(var(--section-y) * 0.7);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.heroText {
+  min-width: 0;
+}
+
+.heroTitle {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+}
+
+.botanical {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--text-quiet-warm);
+  margin: 0 0 20px;
+}
+
+.heroLead {
+  font-size: 17px;
+  line-height: 1.68;
+  color: var(--text-body);
+  max-width: 52ch;
+  margin: 0 0 28px;
+}
+
+.heroFrame {
+  aspect-ratio: 4 / 3;
+  min-width: 0;
+}
+
+.chips {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--nav-link);
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 6px 10px;
+}
+
+/* --- Bands ---------------------------------------------------------------- */
+
+.band {
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding: calc(var(--section-y) * 0.7) 0;
+}
+
+/* White would be a third ground; ink is the site's only alternate. */
+.bandDark {
+  composes: band;
+  background: var(--ink);
+  border-top-color: var(--ink-line);
+}
+
+.bandHead {
+  margin-bottom: 30px;
+}
+
+.lead {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 56ch;
+}
+
+.leadDark {
+  composes: lead;
+  color: var(--text-on-dark);
+}
+
+.subhead {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  margin: 0 0 14px;
+}
+
+.subheadDark {
+  composes: subhead;
+  color: var(--text-quiet-dark);
+}
+
+.prose {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--text-body);
+  margin: 0;
+  max-width: 68ch;
+}
+
+.statesBlock {
+  margin-top: 36px;
+}
+
+/* --- List grids ----------------------------------------------------------- */
+
+/* The 1px grid: the wrapper background shows through the gaps, so dividers stay
+   exactly 1px and never double between cells. */
+.listGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.listGridDark {
+  composes: listGrid;
+  background: var(--ink-line);
+  border-color: var(--ink-line);
+}
+
+.listCell {
+  background: var(--white);
+  padding: 18px 20px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+.listCellDark {
+  background: var(--ink);
+  padding: 18px 20px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-on-dark);
+}
+
+/* --- Specification table --------------------------------------------------- */
+
+.specTableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--ink-line);
+}
+
+.specTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--ink);
+}
+
+.specTable th,
+.specTable td {
+  text-align: left;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--ink-line);
+  font-size: 14.5px;
+  line-height: 1.5;
+}
+
+.specTable th {
+  font-weight: 600;
+  color: var(--text-on-dark);
+  white-space: nowrap;
+  width: 40%;
+}
+
+.specTable td {
+  color: var(--white);
+}
+
+.specTable tr:last-child th,
+.specTable tr:last-child td {
+  border-bottom: 0;
+}
+
+/* --- Export facts ---------------------------------------------------------- */
+
+.facts {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.fact {
+  background: var(--white);
+  padding: 22px 20px;
+}
+
+.factLabel {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  margin: 0 0 8px;
+}
+
+.factValue {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0;
+}
+
+/* --- Quality steps --------------------------------------------------------- */
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1px;
+  background: var(--ink-line);
+  border: 1px solid var(--ink-line);
+}
+
+.step {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  background: var(--ink);
+  padding: 20px;
+}
+
+.stepNumber {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--accent-light);
+  flex-shrink: 0;
+}
+
+.stepLabel {
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--text-on-dark);
+}
+
+/* --- Documents -------------------------------------------------------------- */
+
+.docs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.doc {
+  background: var(--white);
+}
+
+.docLink {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px;
+  color: inherit;
+  transition: var(--transition);
+}
+
+.docLink:hover {
+  background: var(--paper-alt);
+  color: inherit;
+}
+
+.docLabel {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.docLink:hover .docLabel {
+  color: var(--accent-deep);
+}
+
+.docMeta {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text-quiet);
+}
+
+/* --- FAQ -------------------------------------------------------------------- */
+
+.faq {
+  border: 1px solid var(--line);
+  background: var(--white);
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--line);
+}
+
+.faqItem:last-child {
+  border-bottom: 0;
+}
+
+.faqQuestion {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--text);
+  padding: 20px 52px 20px 20px;
+  cursor: pointer;
+  position: relative;
+  list-style: none;
+  transition: var(--transition);
+}
+
+/* Safari renders a disclosure triangle unless this is removed explicitly. */
+.faqQuestion::-webkit-details-marker {
+  display: none;
+}
+
+.faqQuestion:hover {
+  color: var(--accent-deep);
+}
+
+.faqQuestion::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  line-height: 1;
+  color: var(--accent-deep);
+}
+
+.faqItem[open] .faqQuestion::after {
+  content: "−";
+}
+
+.faqAnswer {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin: 0;
+  padding: 0 20px 22px;
+  max-width: 68ch;
+}
+
+/* --- Related ----------------------------------------------------------------- */
+
+.related {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 28px;
+}
+
+.relatedCard {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  min-width: 0;
+}
+
+.relatedFrame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  border: 1px solid var(--line-warm);
+  background: var(--paper-alt);
+  margin-bottom: 14px;
+}
+
+.relatedTitle {
+  font-family: var(--serif);
+  font-size: 19px;
+  color: var(--text);
+  margin-bottom: 4px;
+  transition: var(--transition);
+}
+
+.relatedCard:hover .relatedTitle {
+  color: var(--accent-deep);
+}
+
+.relatedNote {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-quiet);
+}
+
+/* --- Request a quote ---------------------------------------------------------- */
+
+.quote {
+  background: var(--ink-deep);
+  padding: var(--section-y) 0;
+}
+
+.quoteInner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.quoteHeading {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin: 0 0 16px;
+  max-width: 20ch;
+}
+
+.quoteBody {
+  font-size: 15.5px;
+  line-height: 1.68;
+  color: var(--text-on-dark);
+  margin: 0;
+  max-width: 52ch;
+}
+
+/* --- Responsive ---------------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .heroFrame {
+    max-height: 380px;
+  }
+}
+
+@media (max-width: 767px) {
+  .listGrid,
+  .listGridDark,
+  .steps,
+  .docs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .specTable th {
+    width: auto;
+    white-space: normal;
+  }
+
+  .related {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+  }
+
+  .quoteInner {
+    align-items: flex-start;
+    gap: 28px;
+  }
+}

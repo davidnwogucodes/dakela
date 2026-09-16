@@ -10,35 +10,8 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { adminClient } from "@/lib/supabase/server";
+import { toProductRow } from "@/lib/product-row";
 import { validateProduct, type ProductInput } from "@/lib/validation";
-
-/** Trims, clamps and drops anything the client sent that is not a real column —
- *  the client object is never spread into the query. */
-function toRow(input: ProductInput) {
-  const text = (v: unknown, max = 600) =>
-    typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null;
-
-  return {
-    slug: String(input.slug).trim().toLowerCase(),
-    title: String(input.title).trim().slice(0, 120),
-    description: text(input.description) ?? "",
-    commodities: Array.isArray(input.commodities)
-      ? input.commodities
-          .map((c) => String(c).trim())
-          .filter(Boolean)
-          .slice(0, 30)
-      : [],
-    image_path: text(input.image_path, 400),
-    image_position: text(input.image_position, 40) ?? "center",
-    alt: text(input.alt, 300) ?? "",
-    origin: text(input.origin),
-    uses: text(input.uses),
-    nutrition: text(input.nutrition),
-    grades: text(input.grades),
-    seasonality: text(input.seasonality),
-    published: Boolean(input.published),
-  };
-}
 
 export async function POST(request: Request) {
   const denied = await requireAdmin();
@@ -68,7 +41,7 @@ export async function POST(request: Request) {
 
   const { data, error } = await db
     .from("products")
-    .insert({ ...toRow(input), sort_order: (last?.sort_order ?? 0) + 1 })
+    .insert({ ...toProductRow(input), sort_order: (last?.sort_order ?? 0) + 1 })
     .select("id")
     .single();
 

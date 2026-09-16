@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { ProductEditor } from "@/components/admin/ProductEditor";
+import { getAllProducts } from "@/lib/content";
 import ui from "@/styles/admin.module.css";
 
-export default function NewProductPage() {
+export const dynamic = "force-dynamic";
+
+export default async function NewProductPage() {
+  const siblings = (await getAllProducts()).map((p) => ({ slug: p.slug, title: p.title }));
+
   return (
     <>
       <header className={ui.pageHead}>
@@ -18,7 +23,7 @@ export default function NewProductPage() {
         </div>
       </header>
 
-      <ProductEditor product={null} imageUrl={null} />
+      <ProductEditor product={null} imageUrl={null} siblings={siblings} />
     </>
   );
 }

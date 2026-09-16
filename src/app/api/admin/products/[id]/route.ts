@@ -4,35 +4,10 @@ import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
 import { adminClient } from "@/lib/supabase/server";
+import { toProductRow } from "@/lib/product-row";
 import { validateProduct, type ProductInput } from "@/lib/validation";
 
 type Context = { params: Promise<{ id: string }> };
-
-function toRow(input: ProductInput) {
-  const text = (v: unknown, max = 600) =>
-    typeof v === "string" && v.trim() ? v.trim().slice(0, max) : null;
-
-  return {
-    slug: String(input.slug).trim().toLowerCase(),
-    title: String(input.title).trim().slice(0, 120),
-    description: text(input.description) ?? "",
-    commodities: Array.isArray(input.commodities)
-      ? input.commodities
-          .map((c) => String(c).trim())
-          .filter(Boolean)
-          .slice(0, 30)
-      : [],
-    image_path: text(input.image_path, 400),
-    image_position: text(input.image_position, 40) ?? "center",
-    alt: text(input.alt, 300) ?? "",
-    origin: text(input.origin),
-    uses: text(input.uses),
-    nutrition: text(input.nutrition),
-    grades: text(input.grades),
-    seasonality: text(input.seasonality),
-    published: Boolean(input.published),
-  };
-}
 
 export async function PATCH(request: Request, { params }: Context) {
   const denied = await requireAdmin();
@@ -52,7 +27,7 @@ export async function PATCH(request: Request, { params }: Context) {
     return NextResponse.json({ errors }, { status: 422 });
   }
 
-  const { error } = await adminClient().from("products").update(toRow(input)).eq("id", id);
+  const { error } = await adminClient().from("products").update(toProductRow(input)).eq("id", id);
 
   if (error) {
     if (error.code === "23505") {
