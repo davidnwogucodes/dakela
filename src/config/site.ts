@@ -15,19 +15,27 @@ export const site = {
   descriptor: "Exports Nigeria Ltd",
   tagline: "Agricultural commodity exports · Nigeria",
 
-  /** TODO(client): confirm the production domain before launch. */
-  url: "https://dakelaexports.com",
+  /** The live domain. Drives canonical URLs, the sitemap, Open Graph tags and
+   *  the JSON-LD organisation id — all of which search engines treat as
+   *  identity, so it must match where the site actually serves from. */
+  url: "https://dakela.com.ng",
 
   phoneDisplay: "+234 916 269 4790",
   phoneHref: `tel:+${PHONE_E164}`,
 
-  /** TODO(client): email domain is assumed, not confirmed. */
-  email: "info@dakelaexports.com",
+  /**
+   * Fallbacks only. The live values are edited under Company details in the
+   * dashboard and stored on the settings row; these are what renders if that
+   * column is blank, so the site never shows an empty address or a mailto:
+   * with nothing after it.
+   */
+  email: "info@dakela.com.ng",
 
-  /** TODO(client): real CAC RC number. Appears in the credibility strip and contact panel. */
-  rcNumber: "0000000",
+  rcNumber: "9113189",
 
-  /** TODO(client): real street, city and state. `street` empty => JSON-LD omits the postal address. */
+  /** Office address is unconfirmed; an empty street makes JSON-LD omit the
+   *  postal address rather than publish a partial one. Editable in the
+   *  dashboard under Company details. */
   address: {
     street: "",
     city: "",
@@ -38,8 +46,6 @@ export const site = {
     placeholderLines: ["Add street, city and state", "Nigeria"],
   },
 } as const;
-
-export const site_email_href = `mailto:${site.email}`;
 
 /**
  * Build-time content flags carried over from the prototype.

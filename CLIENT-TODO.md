@@ -4,14 +4,14 @@ Carried over from the design handoff. Each item lists exactly where it is set in
 
 | # | Item | Current placeholder | Where to change |
 |---|---|---|---|
-| 1 | **CAC RC number** — appears twice (credibility strip, contact panel) | `0000000` | `site.rcNumber` in [src/config/site.ts](src/config/site.ts) |
-| 2 | **Email address** — assumed, not confirmed | `info@dakelaexports.com` | `site.email` in [src/config/site.ts](src/config/site.ts) |
-| 3 | **Office address** | "Add street, city and state" | `site.address` in [src/config/site.ts](src/config/site.ts) — filling in `street` also switches the JSON-LD from country-only to a full `PostalAddress` |
-| 4 | **Production domain** — used for canonical URL, Open Graph, sitemap, JSON-LD | `https://dakelaexports.com` | `site.url` in [src/config/site.ts](src/config/site.ts) |
-| 5 | **Full-resolution photography** | Browser-drop exports from the prototype | Replace files in [public/assets/](public/assets/) — see the table below |
-| 6 | **Per-image alt text and framing** | Descriptive placeholders written during the build | `alt` and `imagePosition` in [src/data/products.ts](src/data/products.ts); `alt` props in `Hero`, `About`, `Markets` |
+| 1 | ~~CAC RC number~~ — **done** (9113189) | — | Editable at `/admin/company` |
+| 2 | ~~Email address~~ — **done** (info@dakela.com.ng) | — | Editable at `/admin/company` |
+| 3 | **Office address** — still unconfirmed. While the street is blank the Office row is hidden and no postal address is published as structured data. | Not shown | Editable at `/admin/company` — no developer needed |
+| 4 | ~~Production domain~~ — **done** (https://dakela.com.ng) | — | `site.url` in [src/config/site.ts](src/config/site.ts) |
+| 5 | **Full-resolution photography** | Browser-drop exports from the prototype | Upload per product at `/admin/products`, or replace the files in [public/assets/](public/assets/) |
+| 6 | **Per-image alt text and framing** | Descriptive placeholders written during the build | Per product at `/admin/products` — alt text and crop focus sit beside the photo upload |
 | 7 | **Destination markets**, if the client wants them named | Not shown | The Markets fact grid (`marketFacts` in [src/data/content.ts](src/data/content.ts)) is the right place. Per the handoff, do **not** add a world map or country list until real destinations are confirmed. |
-| 8 | **Real certifications** (NEPC registration, SGS/phytosanitary) once obtained | Not claimed | `credibilityClaims` in [src/data/content.ts](src/data/content.ts), or the Markets fact grid |
+| 8 | **Real certifications** (NEPC registration, SGS/phytosanitary) once obtained | Export documents listed as "as applicable" | `/admin/export-info` → Export documentation. Harder claims belong in `credibilityClaims` in [src/data/content.ts](src/data/content.ts) |
 
 ## Photography — what to ask the client for
 
@@ -30,9 +30,9 @@ Ask for the original camera files. `next/image` generates the responsive `srcset
 AVIF/WebP variants from whatever is in `public/assets/`, so no code changes are needed
 once the originals land — but it cannot invent detail that is not in the source.
 
-Also confirm framing per image while you are asking: `imagePosition` in
-[src/data/products.ts](src/data/products.ts) is currently `center` for all six cards,
-and the three feature photos crop from centre.
+Also confirm framing per image while you are asking: crop focus is `center` for all six
+product cards and the three feature photos. Product framing is set beside the photo
+upload at `/admin/products`; the feature photos are still set in code.
 
 ## Deliberately not claimed
 

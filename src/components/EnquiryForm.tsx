@@ -13,7 +13,6 @@ import {
   type Answers,
   type Submission,
 } from "@/lib/submission";
-import { site, site_email_href } from "@/config/site";
 import shared from "@/styles/shared.module.css";
 import styles from "./EnquiryForm.module.css";
 
@@ -61,12 +60,18 @@ export function EnquiryForm({
   commodities,
   buyerEnabled,
   supplierEnabled,
+  email,
+  emailHref,
 }: {
   fields: FormField[];
   /** Drawn from the published products, so the dropdown follows the catalogue. */
   commodities: string[];
   buyerEnabled: boolean;
   supplierEnabled: boolean;
+  /** Resolved server-side: this is a client component, and the company details
+   *  live in the database rather than in the shipped config. */
+  email: string;
+  emailHref: string;
 }) {
   const uid = useId();
   const searchParams = useSearchParams();
@@ -321,8 +326,8 @@ export function EnquiryForm({
             : "Our sourcing team reviews new suppliers weekly and will be in touch. If it is urgent, email us and quote your company name."}
         </p>
         <div className={shared.buttonRow}>
-          <a href={site_email_href} className={shared.btnPrimary}>
-            {site.email}
+          <a href={emailHref} className={shared.btnPrimary}>
+            {email}
           </a>
           <button
             type="button"
@@ -351,8 +356,8 @@ export function EnquiryForm({
           Please email us and we will pick it up from there.
         </p>
         <div className={shared.buttonRow}>
-          <a href={site_email_href} className={shared.btnPrimary}>
-            {site.email}
+          <a href={emailHref} className={shared.btnPrimary}>
+            {email}
           </a>
         </div>
       </div>

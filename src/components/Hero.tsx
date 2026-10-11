@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ENQUIRY_PATH, site_email_href } from "@/config/site";
+import { ENQUIRY_PATH } from "@/config/site";
+import { getCompany } from "@/lib/content";
 import shared from "@/styles/shared.module.css";
 import styles from "./Hero.module.css";
 
-export function Hero() {
+export async function Hero() {
+  const company = await getCompany();
+
   return (
     <section id="top" className={styles.hero}>
       <div className={`${shared.container} ${styles.grid}`}>
@@ -30,7 +33,7 @@ export function Hero() {
             <Link href={ENQUIRY_PATH} className={shared.btnPrimary}>
               Request an offer
             </Link>
-            <a href={site_email_href} className={shared.btnSecondary}>
+            <a href={company.emailHref} className={shared.btnSecondary}>
               Email the trade desk
             </a>
           </div>

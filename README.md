@@ -97,9 +97,9 @@ individual grids collapse in their own modules.
 - `Organization` + `LocalBusiness` JSON-LD in
   [src/components/JsonLd.tsx](src/components/JsonLd.tsx), written conservatively — no
   claims the company cannot yet support.
-- **Highest-value expansion:** per-commodity landing pages at `/products/[slug]`.
-  [src/data/products.ts](src/data/products.ts) already carries `slug`, so the routes can be
-  generated from the same source without restructuring.
+- **Per-commodity landing pages** at `/products/[slug]`, generated from the products
+  table and prerendered at build time. Each carries its own metadata, canonical URL and
+  sitemap entry — the highest-value SEO surface on the site.
 
 ## Hosting
 

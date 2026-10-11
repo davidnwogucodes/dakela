@@ -1,13 +1,11 @@
 import Link from "next/link";
-import { ENQUIRY_PATH, site, site_email_href } from "@/config/site";
+import { ENQUIRY_PATH } from "@/config/site";
+import { getCompany } from "@/lib/content";
 import shared from "@/styles/shared.module.css";
 import styles from "./Contact.module.css";
 
-export function Contact() {
-  const { street, city, state, country, placeholderLines } = site.address;
-  const addressLines = street
-    ? [street, [city, state].filter(Boolean).join(", "), country].filter(Boolean)
-    : placeholderLines;
+export async function Contact() {
+  const company = await getCompany();
 
   return (
     <section id="contact" className={styles.section}>
@@ -26,8 +24,8 @@ export function Contact() {
             <Link href={ENQUIRY_PATH} className={shared.btnPrimary}>
               Send your specification
             </Link>
-            <a href={site_email_href} className={shared.btnSecondary}>
-              {site.email}
+            <a href={company.emailHref} className={shared.btnSecondary}>
+              {company.email}
             </a>
           </div>
         </div>
@@ -38,33 +36,38 @@ export function Contact() {
         <div className={styles.panel}>
           <div className={styles.panelRow}>
             <div className={styles.panelLabel}>Telephone</div>
-            <a href={site.phoneHref} className={styles.phone}>
-              {site.phoneDisplay}
+            <a href={company.phoneHref} className={styles.phone}>
+              {company.phone}
             </a>
           </div>
 
           <div className={styles.panelRow}>
             <div className={styles.panelLabel}>Email</div>
-            <a href={site_email_href} className={styles.emailValue}>
-              {site.email}
+            <a href={company.emailHref} className={styles.emailValue}>
+              {company.email}
             </a>
           </div>
 
-          <div className={styles.panelRow}>
-            <div className={styles.panelLabel}>Office</div>
-            <address className={styles.panelText}>
-              {addressLines.map((line, index) => (
-                <span key={line}>
-                  {line}
-                  {index < addressLines.length - 1 && <br />}
-                </span>
-              ))}
-            </address>
-          </div>
+          {/* The office row is left out entirely until an address is on file.
+              An empty row, or a "coming soon" placeholder, both read worse on a
+              live site than the row simply not being there. */}
+          {company.addressLines.length > 1 && (
+            <div className={styles.panelRow}>
+              <div className={styles.panelLabel}>Office</div>
+              <address className={styles.panelText}>
+                {company.addressLines.map((line, index) => (
+                  <span key={line}>
+                    {line}
+                    {index < company.addressLines.length - 1 && <br />}
+                  </span>
+                ))}
+              </address>
+            </div>
+          )}
 
           <div className={styles.panelRow}>
             <div className={styles.panelLabel}>Registration</div>
-            <div className={styles.panelText}>CAC RC {site.rcNumber}</div>
+            <div className={styles.panelText}>CAC RC {company.rcNumber}</div>
           </div>
         </div>
       </div>

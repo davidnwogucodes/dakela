@@ -5,8 +5,8 @@ import { EnquiryForm } from "@/components/EnquiryForm";
 import { Footer } from "@/components/Footer";
 import { Masthead } from "@/components/Masthead";
 import { ThemeStyle } from "@/components/ThemeStyle";
-import { site, site_email_href } from "@/config/site";
-import { getFormFields, getPublishedProducts, getSettings } from "@/lib/content";
+import { site } from "@/config/site";
+import { getCompany, getFormFields, getPublishedProducts, getSettings } from "@/lib/content";
 import shared from "@/styles/shared.module.css";
 import styles from "./page.module.css";
 
@@ -27,10 +27,11 @@ export const metadata: Metadata = {
 };
 
 export default async function EnquiryPage() {
-  const [fields, products, settings] = await Promise.all([
+  const [fields, products, settings, company] = await Promise.all([
     getFormFields(true),
     getPublishedProducts(),
     getSettings(),
+    getCompany(),
   ]);
 
   // The commodity dropdown follows the catalogue, so adding a product adds its
@@ -59,7 +60,7 @@ export default async function EnquiryPage() {
                     One form for both sides of the trade. Buyers get an indicative offer
                     within one working day; suppliers go to our sourcing team for review.
                     If you would rather talk first,{" "}
-                    <a href={site_email_href}>email the trade desk</a>.
+                    <a href={company.emailHref}>email the trade desk</a>.
                   </>
                 )}
               </p>
@@ -72,6 +73,8 @@ export default async function EnquiryPage() {
                   commodities={commodities}
                   buyerEnabled={settings.buyer_enabled}
                   supplierEnabled={settings.supplier_enabled}
+                  email={company.email}
+                  emailHref={company.emailHref}
                 />
               </Suspense>
             </div>

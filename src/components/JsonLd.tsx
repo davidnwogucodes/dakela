@@ -1,4 +1,5 @@
 import { site } from "@/config/site";
+import { getCompany } from "@/lib/content";
 
 /**
  * Organization + LocalBusiness structured data.
@@ -8,8 +9,8 @@ import { site } from "@/config/site";
  * is omitted entirely until the client supplies a real one — publishing a
  * placeholder address as structured data is worse than publishing none.
  */
-export function JsonLd() {
-  const hasAddress = site.address.street.length > 0;
+export async function JsonLd() {
+  const company = await getCompany();
 
   const organization = {
     "@context": "https://schema.org",
@@ -22,15 +23,15 @@ export function JsonLd() {
     image: `${site.url}/assets/hero-photo.webp`,
     description:
       "Nigerian exporter of agricultural commodities — sesame, cocoa, cashew, hibiscus, palm and cassava products — supplied to international buyers on FOB, CFR and CIF terms.",
-    telephone: site.phoneDisplay,
-    email: site.email,
+    telephone: company.phone,
+    email: company.email,
     address: {
       "@type": "PostalAddress",
       addressCountry: site.address.countryCode,
-      ...(hasAddress && {
-        streetAddress: site.address.street,
-        addressLocality: site.address.city,
-        addressRegion: site.address.state,
+      ...(company.hasAddress && {
+        streetAddress: company.street,
+        addressLocality: company.city,
+        addressRegion: company.state,
       }),
     },
     areaServed: "Worldwide",
@@ -45,8 +46,8 @@ export function JsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
-      telephone: site.phoneDisplay,
-      email: site.email,
+      telephone: company.phone,
+      email: company.email,
       availableLanguage: "English",
       areaServed: "Worldwide",
     },
@@ -55,7 +56,8 @@ export function JsonLd() {
   return (
     <script
       type="application/ld+json"
-      // Structured data is a static literal — no user input is interpolated.
+      // Values come from the dashboard, so JSON.stringify is doing the
+      // escaping here — never build this string by concatenation.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
     />
   );

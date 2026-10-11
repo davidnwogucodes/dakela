@@ -144,6 +144,58 @@ export type FormField = {
   sort_order: number;
 };
 
+/**
+ * Company details as the owner entered them.
+ *
+ * Stored as a JSON document in Supabase Storage rather than as columns on
+ * settings — see src/lib/store.ts for why. Every field is optional; a blank one
+ * falls back to the value shipped in src/config/site.ts.
+ */
+export type CompanyRecord = {
+  email: string;
+  phone: string;
+  street: string;
+  city: string;
+  state: string;
+  country: string;
+  rcNumber: string;
+};
+
+export const emptyCompanyRecord: CompanyRecord = {
+  email: "",
+  phone: "",
+  street: "",
+  city: "",
+  state: "",
+  country: "",
+  rcNumber: "",
+};
+
+/** The document name inside the site-content bucket. */
+export const COMPANY_DOC = "company.json";
+
+/**
+ * The company details as the site should render them: the dashboard value
+ * where there is one, the repository fallback where there is not. Resolved
+ * once by getCompany() so no component has to know about the fallback rule.
+ */
+export type Company = {
+  email: string;
+  emailHref: string;
+  phone: string;
+  phoneHref: string;
+  rcNumber: string;
+  /** Address lines, already filtered of blanks. Empty when no office is set. */
+  addressLines: string[];
+  /** True when a street is on file — JSON-LD only publishes a postal address
+   *  once there is a real one, never a half-written one. */
+  hasAddress: boolean;
+  street: string;
+  city: string;
+  state: string;
+  country: string;
+};
+
 export type Settings = {
   theme_preset: string;
   accent: string | null;
@@ -164,6 +216,7 @@ export type Settings = {
   default_moq: string | null;
   default_lead_time: string | null;
   downloads_note: string | null;
+
 };
 
 export type EnquiryItem = {

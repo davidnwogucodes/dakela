@@ -107,9 +107,9 @@ export default async function OverviewPage() {
               <Link href="/admin/products">Products</Link>
             </dt>
             <dd className={styles.guideDef}>
-              Add, edit, reorder, hide or delete the commodity groups. Upload a photo for
-              each, and fill in the origin, uses and nutrition shown when a visitor hovers
-              the card.
+              Add, edit, reorder, hide or delete the commodity groups. Upload photos and
+              PDF spec sheets, write the full product page, and fill in the details shown
+              when a visitor hovers the card.
             </dd>
           </div>
           <div className={styles.guideItem}>
@@ -120,6 +120,25 @@ export default async function OverviewPage() {
               Rename questions, reorder them, mark them required, hide the ones you do not
               need, edit dropdown choices, and add your own questions — separately for
               buyers and for suppliers.
+            </dd>
+          </div>
+          <div className={styles.guideItem}>
+            <dt className={styles.guideTerm}>
+              <Link href="/admin/export-info">Export info</Link>
+            </dt>
+            <dd className={styles.guideDef}>
+              The blocks that appear on every product page — packaging, loading ports,
+              quality control, export documents, Incoterms. Edited once here rather than
+              on each product.
+            </dd>
+          </div>
+          <div className={styles.guideItem}>
+            <dt className={styles.guideTerm}>
+              <Link href="/admin/company">Company details</Link>
+            </dt>
+            <dd className={styles.guideDef}>
+              Email, telephone, registered office and CAC number. Used across the whole
+              site, including the structured data search engines read.
             </dd>
           </div>
           <div className={styles.guideItem}>

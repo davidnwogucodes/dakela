@@ -12,8 +12,13 @@
 
 import "server-only";
 import { adminClient, isConfigured } from "./supabase/server";
+import { site } from "@/config/site";
+import { readDoc } from "./store";
 import {
+  COMPANY_DOC,
   defaultSettings,
+  type Company,
+  type CompanyRecord,
   type Enquiry,
   type FaqItem,
   type FormField,
@@ -24,6 +29,8 @@ import {
 } from "./model";
 
 export type {
+  Company,
+  CompanyRecord,
   Enquiry,
   EnquiryItem,
   FaqItem,
@@ -94,6 +101,9 @@ function normaliseSettings(row: Record<string, unknown>): Settings {
   const list = (v: unknown): string[] =>
     Array.isArray(v) ? v.filter((x): x is string => typeof x === "string") : [];
 
+  const text = (v: unknown): string | null =>
+    typeof v === "string" && v.trim() ? v : null;
+
   return {
     ...defaultSettings,
     ...(row as Partial<Settings>),
@@ -106,6 +116,59 @@ function normaliseSettings(row: Record<string, unknown>): Settings {
     why_us: list(row.why_us),
     faq: Array.isArray(row.faq) ? (row.faq as FaqItem[]) : [],
   };
+}
+
+/**
+ * Company details as the site should render them.
+ *
+ * Every field falls back to src/config/site.ts when the dashboard has not been
+ * filled in, so a fresh project — or one that has not run migration-003 — still
+ * renders a complete contact panel instead of blanks.
+ */
+export function resolveCompany(record: CompanyRecord | null): Company {
+  const email = record?.email?.trim() || site.email;
+  const phone = record?.phone?.trim() || site.phoneDisplay;
+
+  const street = record?.street?.trim() ?? "";
+  const city = record?.city?.trim() ?? "";
+  const state = record?.state?.trim() ?? "";
+  const country = record?.country?.trim() || site.address.country;
+
+  // "Lagos, Lagos State" reads badly; drop the duplicate when they match.
+  const locality = [city, state === city ? "" : state].filter(Boolean).join(", ");
+
+  return {
+    email,
+    emailHref: "mailto:" + email,
+    phone,
+    // tel: wants digits only — strip spaces, dashes and brackets, keep a
+    // leading plus so an international number still dials correctly.
+    phoneHref: "tel:" + phone.replace(/[^d+]/g, ""),
+    rcNumber: record?.rcNumber?.trim() || site.rcNumber,
+    addressLines: [street, locality, country].filter(Boolean),
+    hasAddress: street.length > 0,
+    street,
+    city,
+    state,
+    country,
+  };
+}
+
+/**
+ * The stored company document, or null before anything has been saved.
+ *
+ * `fresh` bypasses the data cache — the dashboard passes it so the owner never
+ * sees the value they just replaced still sitting in the form.
+ */
+export async function getCompanyRecord(
+  options: { fresh?: boolean } = {},
+): Promise<CompanyRecord | null> {
+  return readDoc<CompanyRecord>(COMPANY_DOC, options);
+}
+
+/** Company details as the site should render them, fallbacks applied. */
+export async function getCompany(): Promise<Company> {
+  return resolveCompany(await getCompanyRecord());
 }
 
 /* -------------------------------------------------------------------------- */
