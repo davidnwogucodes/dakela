@@ -18,7 +18,10 @@ export const site = {
   /** The live domain. Drives canonical URLs, the sitemap, Open Graph tags and
    *  the JSON-LD organisation id — all of which search engines treat as
    *  identity, so it must match where the site actually serves from. */
-  url: "https://dakela.com.ng",
+  // www, not the apex: dakela.com.ng 308-redirects to www.dakela.com.ng, and a
+  // canonical URL must name the address that actually serves the page rather
+  // than one that bounces to it.
+  url: "https://www.dakela.com.ng",
 
   phoneDisplay: "+234 916 269 4790",
   phoneHref: `tel:+${PHONE_E164}`,
